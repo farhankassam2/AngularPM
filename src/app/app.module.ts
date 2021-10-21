@@ -12,7 +12,7 @@ import { RouterModule } from '@angular/router';
     ProductListComponent
   ],
   imports: [ // external, third-party or our own modules that we want to make available to all components declared in this module
-    BrowserModule, // allows application to work directly in the browser
+    BrowserModule, // allows application to work directly in the browser and exposes the structural Angular directives
     RouterModule
   ],
   providers: [], // defined services
