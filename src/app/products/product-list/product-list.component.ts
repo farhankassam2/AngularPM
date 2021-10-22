@@ -21,9 +21,11 @@ export class ProductListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    console.log("In OnChanges: ", changes);
   }
 
   ngOnDestroy(): void {
+    console.log('InOnDestroy');
   }
 
   toggleShowImages(): void {
