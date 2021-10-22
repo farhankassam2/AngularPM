@@ -1,4 +1,4 @@
-export interface Product {
+export interface IProduct {
     productId: number;
     productName: string;
     productCode: string;
@@ -7,9 +7,21 @@ export interface Product {
     price: number;
     starRating: number;
     imageUrl: string;
+    // logOutput: () => {console.log('legend')};
 }
 
-export const PRODUCT_LIST_MOCK: Product[] = [
+// export type IProduct = {
+//     productId: number;
+//     productName: string;
+//     productCode: string;
+//     releaseDate: string;
+//     description: string;
+//     price: number;
+//     starRating: number;
+//     imageUrl: string;
+// }
+
+export const PRODUCT_LIST_MOCK: IProduct[] = [
     {
         "productId": 1,
         "productName": "Leaf Rake",
