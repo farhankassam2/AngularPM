@@ -12,7 +12,16 @@ export class ProductListComponent implements OnInit, OnChanges, OnDestroy {
   // public imageWidth = 50; // type is inferred after the first declaration in TS
   // public imageMargin = 2;
   public areImagesShowing: boolean = false;
-  public filterByProductName: string = '';
+  // public filterByProductName: string = '';
+  private _filterByProductName: string = ''; // Backing variable
+  public get filterByProductName(): string {
+    return this._filterByProductName;
+  }
+  public set filterByProductName(value: string) {
+    this._filterByProductName = value;
+    console.log('In setter: ', this._filterByProductName);
+    this.products = this.filterProducts(value);
+  }
 
   constructor() { }
 
@@ -30,6 +39,10 @@ export class ProductListComponent implements OnInit, OnChanges, OnDestroy {
 
   toggleShowImages(): void {
     this.areImagesShowing = !this.areImagesShowing;
+  }
+
+  filterProducts(value: string): IProduct[] {
+    return PRODUCT_LIST_MOCK.filter((product: IProduct) => product.productName.toLocaleLowerCase().includes(value.toLocaleLowerCase()));
   }
 
 }

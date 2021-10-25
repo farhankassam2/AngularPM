@@ -7,12 +7,14 @@ import { ProductListComponent } from './products/product-list/product-list.compo
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ConvertToSpacesPipe } from './pipes/convert-to-spaces-pipe.pipe';
+import { StarComponent } from './common-components/star/star.component';
 
 @NgModule({
   declarations: [ // all components we create and define within this module.
     AppComponent,
     ProductListComponent,
-    ConvertToSpacesPipe
+    ConvertToSpacesPipe,
+    StarComponent
   ],
   imports: [ // external, third-party or our own modules that we want to make available to all components declared in this module
     BrowserModule, // allows application to work directly in the browser and exposes the structural Angular directives
