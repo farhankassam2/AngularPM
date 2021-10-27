@@ -3,7 +3,7 @@ import { ProductService } from 'src/app/services/product.service';
 import { IProduct, PRODUCT_LIST_MOCK } from 'src/app/types/product';
 
 @Component({
-  selector: 'pm-product-list',
+  // selector: 'pm-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css'],
   // providers: [ProductService] // component injector - only used by this instance of the component

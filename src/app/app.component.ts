@@ -7,5 +7,4 @@ import { Component } from "@angular/core";
 })
 export class AppComponent {
    pageTitle: string = 'Angular PM'; // by default class properties is public
-
 }

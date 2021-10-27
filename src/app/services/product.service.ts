@@ -12,8 +12,9 @@ export class ProductService {
     return PRODUCT_LIST_MOCK;
   }
 
-  getProductDetails(): IProduct {
-    return PRODUCT_LIST_MOCK[0];
+  getProductDetails(productId: number): IProduct | undefined {
+    const foundProduct = PRODUCT_LIST_MOCK.find(product => product.productId == productId);
+    return foundProduct;
   }
 
 }

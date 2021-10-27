@@ -2,7 +2,14 @@
   <h1>
     {{'Title: ' + pageTitle}}
   </h1>
-  <div>
-    <pm-product-list></pm-product-list>
+  <nav class='navbar navbar-expand navbar-light bg-light'>
+    <ul class='nav nav-pills'>
+      <li><a class='nav-link' [routerLink]="['/welcome']">Home  </a></li>
+      <li><a class='nav-link' routerLink="/products">Product List</a></li> <!-- two ways of defining links -->
+    </ul>
+    <!-- <pm-product-list></pm-product-list> : this is a child component of app.component -->
+  </nav>
+  <div class='container'>
+      <router-outlet></router-outlet>
   </div>
 </div>

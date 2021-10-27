@@ -6,3 +6,8 @@
 thead {
   color: green;
 }
+
+.table-row:hover {
+  background-color: indianred;
+  cursor:pointer;
+}

@@ -1,0 +1,9 @@
+.card-header {
+    margin-top: 10px;
+    background-color: lavender;
+    justify-content: center;
+}
+
+#back-button:hover {
+    background-color:lightgreen;
+}

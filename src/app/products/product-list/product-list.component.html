@@ -35,7 +35,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let product of products">
+                <tr class="table-row" *ngFor="let product of products" routerLink="/products/{{product.productId}}">
                     <td>
                         <img 
                             *ngIf='areImagesShowing'
