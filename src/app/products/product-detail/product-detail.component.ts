@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from 'src/app/services/product.service';
@@ -23,7 +24,7 @@ export class ProductDetailComponent implements OnInit {
     urlId: 0,
     product: undefined
   };
-  constructor(private route: ActivatedRoute, private productService: ProductService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private productService: ProductService, private router: Router, private location: Location) { }
 
   ngOnInit(): void {
     this.getCurrentProductId();
@@ -40,7 +41,8 @@ export class ProductDetailComponent implements OnInit {
   }
 
   navigateBack(): void {
-    this.router.navigate(['/products']);
+    // this.router.navigate(['/products']); // navigate to any given route defined in app routing modulex
+    this.location.back(); // uses browser back functionality
   }
 
 }

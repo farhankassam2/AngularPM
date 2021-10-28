@@ -11,10 +11,11 @@ import { ConvertToSpacesPipe } from './pipes/convert-to-spaces-pipe.pipe';
 import { StarComponent } from './common-components/star/star.component';
 import { ProductDetailComponent } from './products/product-detail/product-detail.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { ProductDetailGuard } from './services/product-detail.guard';
 
 const routes: Routes = [
   { path: 'products', component: ProductListComponent },
-  { path: 'products/:id', component: ProductDetailComponent },
+  { path: 'products/:id', canActivate: [ProductDetailGuard], component: ProductDetailComponent },
   { path: 'welcome', component: WelcomeComponent },
   { path: '', redirectTo: 'welcome', pathMatch: 'full' },
   { path: '**', redirectTo: 'welcome', pathMatch: 'full'}
