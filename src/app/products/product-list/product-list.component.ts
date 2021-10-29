@@ -1,4 +1,5 @@
 import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ProductService } from 'src/app/services/product.service';
 import { IProduct, PRODUCT_LIST_MOCK } from 'src/app/types/product';
 
@@ -11,6 +12,8 @@ import { IProduct, PRODUCT_LIST_MOCK } from 'src/app/types/product';
 export class ProductListComponent implements OnInit, OnChanges, OnDestroy {
   public pageTitle: string = 'Product List';
   public products: IProduct[] = [];
+  private errorMessage: string = '';
+  private subs: Subscription[] = [];
   // public imageWidth = 50; // type is inferred after the first declaration in TS
   public areImagesShowing: boolean = false;
   // public filterByProductName: string = '';
@@ -33,7 +36,10 @@ export class ProductListComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnInit(): void {
     console.log('In OnInit');
-    this.products = this._productService.getProducts();
+    this.subs.push(this._productService.getProducts().subscribe({
+      next: products => this.products = products,
+      error: err => this.errorMessage = err,
+    }));
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -42,6 +48,9 @@ export class ProductListComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnDestroy(): void {
     console.log('InOnDestroy');
+    for (let sub of this.subs) {
+      sub.unsubscribe();
+    }
   }
 
   toggleShowImages(): void {
@@ -49,7 +58,7 @@ export class ProductListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   filterProducts(value: string): IProduct[] {
-    return PRODUCT_LIST_MOCK.filter((product: IProduct) => product.productName.toLocaleLowerCase().includes(value.toLocaleLowerCase()));
+    return this.products.filter((product: IProduct) => product.productName.toLocaleLowerCase().includes(value.toLocaleLowerCase()));
   }
 
   onRatingClick(message: string): void {
