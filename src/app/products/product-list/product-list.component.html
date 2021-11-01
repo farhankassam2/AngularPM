@@ -35,7 +35,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="table-row" *ngFor="let product of products" routerLink="/products/{{product.productId}}">
+                <tr class="table-row" *ngFor="let product of products" routerLink="/products/{{product.id}}">
                     <td>
                         <img 
                             *ngIf='areImagesShowing'
@@ -46,8 +46,8 @@
                             <!-- [style.width.px]='imageWidth' -->
                             <!-- [style.margin.px]='imageMargin' -->
                     </td>
-                    <td>{{product.productName}}</td>
-                    <td>{{product.productCode | lowercase | convertToSpaces:'-':' '}}</td>
+                    <td>{{product.name}}</td>
+                    <td>{{product.code | lowercase | convertToSpaces:'-':' '}}</td>
                     <td>{{product.releaseDate }}</td>
                     <td>{{product.price | currency:'INR':'symbol':'1.2-2' }}</td>
                     <td><pm-star [rating]="product.starRating" (ratingClicked)='onRatingClick($event)'></pm-star></td>

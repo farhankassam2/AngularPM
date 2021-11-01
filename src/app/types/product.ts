@@ -1,7 +1,7 @@
 export interface IProduct {
-    productId: string;
-    productName: string;
-    productCode: string;
+    id: string;
+    name: string;
+    code: string;
     releaseDate: string;
     description: string;
     price: number;
@@ -23,9 +23,9 @@ export interface IProduct {
 
 export const PRODUCT_LIST_MOCK: IProduct[] = [
     {
-        "productId": '1',
-        "productName": "Leaf Rake",
-        "productCode": "GDN-0011",
+        "id": '1',
+        "name": "Leaf Rake",
+        "code": "GDN-0011",
         "releaseDate": "March 19, 2019",
         "description": "Leaf rake with 48-inch wooden handle.",
         "price": 19.95,
@@ -33,9 +33,9 @@ export const PRODUCT_LIST_MOCK: IProduct[] = [
         "imageUrl": "assets/images/leaf_rake.png"
     },
     {
-        "productId": '2',
-        "productName": "Garden Cart",
-        "productCode": "GDN-0023",
+        "id": '2',
+        "name": "Garden Cart",
+        "code": "GDN-0023",
         "releaseDate": "March 18, 2019",
         "description": "15 gallon capacity rolling garden cart",
         "price": 32.99,

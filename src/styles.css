@@ -3,3 +3,6 @@
 @import "~font-awesome/css/font-awesome.min.css";
 
 /*  All other templates will be able to access the above styles */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -1,5 +1,6 @@
 import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { ErrorHandlerService } from 'src/app/services/error-handler.service';
 import { ProductService } from 'src/app/services/product.service';
 import { IProduct, PRODUCT_LIST_MOCK } from 'src/app/types/product';
 
@@ -29,7 +30,7 @@ export class ProductListComponent implements OnInit, OnChanges, OnDestroy {
     this.products = this.filterProducts(value);
   }
 
-  constructor(private _productService: ProductService) { // shortcut for declaring the _productService variable earlier.
+  constructor(private _productService: ProductService, private errorHandler: ErrorHandlerService) { // shortcut for declaring the _productService variable earlier.
     // no functional code
     // initialization of variables ONLY
   }
@@ -46,7 +47,7 @@ export class ProductListComponent implements OnInit, OnChanges, OnDestroy {
   getProducts() {
     this.subs.push(this._productService.getProducts().subscribe({
       next: products => this.products = products,
-      error: err => this.errorMessage = err,
+      complete: () => this.errorHandler.setSuccessMessage('Products fetched successfully!')
     }));
   }
 
@@ -62,7 +63,7 @@ export class ProductListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   filterProducts(value: string): IProduct[] {
-    return this.products.filter((product: IProduct) => product.productName.toLocaleLowerCase().includes(value.toLocaleLowerCase()));
+    return this.products.filter((product: IProduct) => product.name.toLocaleLowerCase().includes(value.toLocaleLowerCase()));
   }
 
   onRatingClick(message: string): void {

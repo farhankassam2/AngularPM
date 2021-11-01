@@ -2,6 +2,7 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { ErrorHandlerService } from 'src/app/services/error-handler.service';
 import { ProductService } from 'src/app/services/product.service';
 import { IProduct } from 'src/app/types/product';
 
@@ -26,7 +27,7 @@ export class ProductDetailComponent implements OnInit {
     productId: '0',
     product: undefined
   };
-  constructor(private route: ActivatedRoute, private _productService: ProductService, private router: Router, private location: Location) { }
+  constructor(private route: ActivatedRoute, private _productService: ProductService, private router: Router, private location: Location, private errorHandler: ErrorHandlerService) { }
 
   ngOnInit(): void {
     this.getCurrentProductId();
@@ -38,7 +39,7 @@ export class ProductDetailComponent implements OnInit {
     // this.state.product = this._productService.getProductDetails(this.state.urlId);
       this.subscription = this._productService.getProductDetails(this.state.productId).subscribe({
         next: (product?) => this.state.product = product,
-        error: (err) => this.state
+        complete: () => this.errorHandler.setSuccessMessage('Product details fetched successfully!')
       });
   }
   

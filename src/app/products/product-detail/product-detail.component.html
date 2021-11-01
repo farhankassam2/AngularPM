@@ -3,7 +3,6 @@
         <button (click)="navigateBack()" id="back-button">
             Back
         </button>
-        {{state.pageTitle + ' : ' + state.product?.productName}}
+        {{state.product ? state.pageTitle + ' : ' + state.product?.name : state.pageTitle + ' : '}}
     </div>
-    
 </div>
