@@ -1,5 +1,5 @@
 export interface IProduct {
-    productId: number;
+    productId: string;
     productName: string;
     productCode: string;
     releaseDate: string;
@@ -23,7 +23,7 @@ export interface IProduct {
 
 export const PRODUCT_LIST_MOCK: IProduct[] = [
     {
-        "productId": 1,
+        "productId": '1',
         "productName": "Leaf Rake",
         "productCode": "GDN-0011",
         "releaseDate": "March 19, 2019",
@@ -33,7 +33,7 @@ export const PRODUCT_LIST_MOCK: IProduct[] = [
         "imageUrl": "assets/images/leaf_rake.png"
     },
     {
-        "productId": 2,
+        "productId": '2',
         "productName": "Garden Cart",
         "productCode": "GDN-0023",
         "releaseDate": "March 18, 2019",

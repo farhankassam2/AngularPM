@@ -15,6 +15,9 @@ import { ProductDetailGuard } from './services/product-detail.guard';
 
 import { catchError, tap } from 'rxjs/operators';
 import { ProductService } from './services/product.service';
+import { InMemoryDataService } from './services/in-memory-data.service';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+
 
 const routes: Routes = [
   { path: 'products', component: ProductListComponent },
@@ -38,6 +41,12 @@ const routes: Routes = [
     FormsModule,
     RouterModule.forRoot(routes),
     HttpClientModule,
+    /*
+         * The HttpClientInMemoryWebApiModule module intercepts HTTP requests
+         * and returns simulated server responses.
+         * Remove it when a real server is ready to receive requests.
+         */
+        HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { dataEncapsulation: false })
   ],
   providers: [ProductService], // defined services
   bootstrap: [AppComponent], // tells Angular to startup application with this component (by bootstsraping this component into transpiled JS).
