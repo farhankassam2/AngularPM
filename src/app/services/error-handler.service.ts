@@ -1,60 +1,43 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable, OnChanges, NgZone } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import {
-   MatSnackBar
-} from '@angular/material/snack-bar';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class ErrorHandlerService implements OnChanges {
+export class ErrorHandlerService {
 
-  errorMessage: string = '';
-  successMessage: string = '';
+  private errorMessage: string = '';
+  private successMessage: string = '';
   readonly DURATION: number = 4000;
 
-  constructor(private snackBar: MatSnackBar, private zone: NgZone) { }
+  constructor(private toastr: ToastrService) { }
 
   
   handleError(err: HttpErrorResponse, callerFunction: string): Observable<never> {
     // send error message to display to the calling function 
     const finalErrorMessage = 'Error during call to ' + callerFunction + ': ' + err.message;
-    this.setErrorMessage(finalErrorMessage);
+    this.displayError(finalErrorMessage);
     return throwError(this.errorMessage); // emits an error notification to listening observers
  }
-  
-  ngOnChanges() {
-    if (this.errorMessage) {
-      this.displayErrorMessage();
-    }
 
-    if (this.successMessage) {
-      this.displaySuccessMessage();
-    }
-  }
-  
-  setErrorMessage(message: string):void {
-    this.errorMessage = message;
-  }
+  // displaySuccessMessage(): void {
+  //   this.toastr.success(this.successMessage);
+  //   this.successMessage = '';
+  // }
 
-  setSuccessMessage(message: string):void {
-    this.successMessage = message;
+  // displayErrorMessage(): void {
+  //   this.toastr.error(this.errorMessage);
+  //   this.errorMessage = '';
+  // }
+
+  displayError(message: string): void {
+    this.toastr.error(message);
   }
 
-  clearMessages():void {
-    this.errorMessage = '';
-    this.successMessage = '';
-  }
-  
-  displaySuccessMessage(): void {
-      this.snackBar.open(this.successMessage, 'success', { duration: this.DURATION });
-      // this.clearMessages();
-  }
-
-  displayErrorMessage(): void {
-      this.snackBar.open(this.errorMessage, 'error', { duration: this.DURATION });
-      // this.clearMessages();
+  displaySuccess(message: string): void {
+    this.toastr.success(message);
   }
 }

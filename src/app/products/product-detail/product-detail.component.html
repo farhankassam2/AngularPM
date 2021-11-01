@@ -5,4 +5,14 @@
         </button>
         {{state.product ? state.pageTitle + ' : ' + state.product?.name : state.pageTitle + ' : '}}
     </div>
+    <div class= 'card-body' *ngIf="state.product">
+            <ul class ="list-group"> 
+                <li class="list-group-item"> Description --> {{state.product.description}}</li>
+                <li class="list-group-item"> Rating --> {{state.product.starRating}}</li>
+                <li class="list-group-item"> Price --> {{state.product.price}}</li>
+                <li class="list-group-item"> Available  --> {{state.product.releaseDate}} </li>
+                <li class="list-group-item"> Code --> {{state.product.code | uppercase | convertToSpaces:'-':' '}}</li>
+                <li class="list-group-item"> Image --> {{state.product.imageUrl}} </li>
+            </ul>
+    </div>
 </div>

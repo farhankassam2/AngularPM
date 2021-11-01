@@ -28,8 +28,6 @@
                         </button>
                     </th>
                     <th> Product </th>
-                    <th> Code </th>
-                    <th> Available </th>
                     <th> Price </th>
                     <th> Star Rating </th>
                 </tr>
@@ -47,9 +45,7 @@
                             <!-- [style.margin.px]='imageMargin' -->
                     </td>
                     <td>{{product.name}}</td>
-                    <td>{{product.code | lowercase | convertToSpaces:'-':' '}}</td>
-                    <td>{{product.releaseDate }}</td>
-                    <td>{{product.price | currency:'INR':'symbol':'1.2-2' }}</td>
+                    <td>{{product.price | currency:'CAD':'symbol':'1.2-2' }}</td>
                     <td><pm-star [rating]="product.starRating" (ratingClicked)='onRatingClick($event)'></pm-star></td>
                 </tr>
             </tbody>

@@ -7,7 +7,7 @@ import { ProductListComponent } from 'src/app/products/product-list/product-list
   styleUrls: ['./star.component.css']
 })
 export class StarComponent implements OnInit, OnChanges {
-  public readonly STARS_WIDTH = 75;
+  public readonly STARS_WIDTH = 100;
   @Input()
   rating!: number;
   // definite assignment assertion: declares a value as null if no value is assigned to the property.

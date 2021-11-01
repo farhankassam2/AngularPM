@@ -18,7 +18,8 @@ import { ProductService } from './services/product.service';
 import { InMemoryDataService } from './services/in-memory-data.service';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ToastrModule } from 'ngx-toastr';
 
 
 const routes: Routes = [
@@ -52,6 +53,7 @@ const routes: Routes = [
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { dataEncapsulation: false }),
 
     BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [ProductService], // defined services
   bootstrap: [AppComponent], // tells Angular to startup application with this component (by bootstsraping this component into transpiled JS).

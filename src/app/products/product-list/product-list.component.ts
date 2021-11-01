@@ -14,9 +14,9 @@ export class ProductListComponent implements OnInit, OnChanges, OnDestroy {
   public pageTitle: string = 'Product List';
   public products: IProduct[] = [];
   private errorMessage: string = '';
-  private subs: Subscription[] = [];
+  private sub!: Subscription;
   // public imageWidth = 50; // type is inferred after the first declaration in TS
-  public areImagesShowing: boolean = false;
+  public areImagesShowing: boolean = true;
   // public filterByProductName: string = '';
   private _filterByProductName: string = ''; // Backing variable
  // private _productService: ProductService;
@@ -44,18 +44,18 @@ export class ProductListComponent implements OnInit, OnChanges, OnDestroy {
     console.log("In OnChanges: ", changes);
   }
 
-  getProducts() {
-    this.subs.push(this._productService.getProducts().subscribe({
-      next: products => this.products = products,
-      complete: () => this.errorHandler.setSuccessMessage('Products fetched successfully!')
-    }));
-  }
-
   ngOnDestroy(): void {
     console.log('InOnDestroy');
-    for (let sub of this.subs) {
-      sub.unsubscribe();
-    }
+    this.sub.unsubscribe(); // cancels ongoing Observable subscription to free up memory and CPU: good practice!!
+  }
+
+  getProducts() {
+    this.sub = this._productService.getProducts().subscribe({
+      next: (products) => {
+        this.products = products
+      },
+      complete: () =>  this.errorHandler.displaySuccess('Products fetched successfully!')
+    });
   }
 
   toggleShowImages(): void {
@@ -63,7 +63,8 @@ export class ProductListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   filterProducts(value: string): IProduct[] {
-    return this.products.filter((product: IProduct) => product.name.toLocaleLowerCase().includes(value.toLocaleLowerCase()));
+    // usually, there would be an HTTP getProducts() call here but I am using MOCK data for now
+    return PRODUCT_LIST_MOCK.filter((product: IProduct) => product.name.toLocaleLowerCase().includes(value.toLocaleLowerCase()));
   }
 
   onRatingClick(message: string): void {
