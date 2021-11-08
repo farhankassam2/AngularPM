@@ -40,7 +40,6 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   }
 
   getProductDetails() {
-    // this.state.product = this._productService.getProductDetails(this.state.urlId);
       this.state.sub = this._productService.getProductDetails(this.state.productId).subscribe({
         next: (product?) => this.state.product = product,
         complete: () => this.errorHandler.displaySuccess('Product details fetched successfully!')
@@ -52,7 +51,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   }
 
   navigateBack(): void {
-    // this.router.navigate(['/products']); // navigate to any given route defined in app routing modulex
+    // this.router.navigate(['/products']); // navigate to any given route defined in app routing module
     this.location.back(); // uses browser back functionality
   }
 
