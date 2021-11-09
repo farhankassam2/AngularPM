@@ -2,6 +2,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable, OnChanges, NgZone } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { MDCSnackbar } from '@material/snackbar';
+import { SnackBarComponent } from '../common-components/snack-bar/snack-bar.component';
 
 
 @Injectable({
@@ -10,10 +12,9 @@ import { ToastrService } from 'ngx-toastr';
 export class ErrorHandlerService {
 
   private errorMessage: string = '';
-  private successMessage: string = '';
   readonly DURATION: number = 4000;
 
-  constructor(private toastr: ToastrService) { }
+  constructor(private toastr: ToastrService, private snackBarComponent: SnackBarComponent) { }
 
   
   handleError(err: HttpErrorResponse, callerFunction: string): Observable<never> {
@@ -34,10 +35,14 @@ export class ErrorHandlerService {
   // }
 
   displayError(message: string): void {
-    this.toastr.error(message);
+    // this.toastr.error(message);
+      this.snackBarComponent.setDisplayMessage(message);
+ 
   }
 
   displaySuccess(message: string): void {
-    this.toastr.success(message);
+    // this.toastr.success(message);
+    // const snackbar = new MDCSnackbar(document.querySelector('.mdc-snackbar') as Element);
+    this.snackBarComponent.setDisplayMessage(message);
   }
 }

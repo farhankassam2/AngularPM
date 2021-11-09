@@ -5,8 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 
 import { RouterModule, Routes } from '@angular/router';
-import { ConvertToSpacesPipe } from './pipes/convert-to-spaces-pipe.pipe';
-import { StarComponent } from './common-components/star/star.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 
 import { ProductService } from './services/product.service';
@@ -15,18 +13,20 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ToastrModule } from 'ngx-toastr';
-import { ProductModule } from './modules/product/product.module';
+import { ProductModule } from './modules/product.module';
+import { SharedModule } from './modules/shared.module';
 
 
 const routes: Routes = [
   { path: 'welcome', component: WelcomeComponent },
+  {path: 'products', loadChildren: 'app/modules/product.module'}, // only loads the child module when 'products' exists in the URL
   { path: '', redirectTo: 'welcome', pathMatch: 'full' },
   { path: '**', redirectTo: 'welcome', pathMatch: 'full'}
 ]
 @NgModule({
   declarations: [ // all components we create and define within this module.
     AppComponent,
-    WelcomeComponent
+    WelcomeComponent,
   ],
   imports: [ // external, third-party or our own modules that we want to make available to all components declared in this module
     BrowserModule, // allows application to work directly in the browser and exposes the structural Angular directives
@@ -41,9 +41,10 @@ const routes: Routes = [
          */
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { dataEncapsulation: false }),
 
-    BrowserAnimationsModule,
+    BrowserAnimationsModule, // enables browser's animation system
     ToastrModule.forRoot(),
-    ProductModule
+    ProductModule,
+    SharedModule
   ],
   providers: [ProductService], // defined services at root-level: but this is not recommended as it is deprecated. Instead, define root-level services 
                               // from within the service itself.

@@ -1,0 +1,18 @@
+
+<div *ngIf="shouldDisplay">
+    <aside class="mdc-snackbar mdc-snackbar--stacked">
+        <div class="mdc-snackbar__surface" >
+            <div class="mdc_snackbar__dismiss">
+                <div class="mdc-snackbar__label" >
+                    {{displayMessage}}
+                </div>
+            </div>
+            <!-- <div class="mdc-snackbar__actions" aria-atomic="true">
+                <button type="button" class="mdc-button mdc-snackbar__action">
+                    <div class="mdc-button__ripple"></div>
+                    <span class="mdc-button__label">Dismiss</span>
+                </button>
+            </div> -->
+        </div>
+    </aside>
+</div>

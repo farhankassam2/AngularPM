@@ -9,7 +9,7 @@ import { IProduct } from 'src/app/types/product';
 type State = {
   pageTitle: string;
   product: IProduct | undefined;
-  productId: string;
+  urlProductId: string;
   sub?: Subscription;
 };
 
@@ -24,15 +24,15 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   // urlId: number = 0;
   state: State = {
     pageTitle: 'Product Detail',
-    productId: '0',
+    urlProductId: '0',
     product: undefined,
   };
   constructor(private route: ActivatedRoute, private _productService: ProductService, private router: Router, private location: Location, private errorHandler: ErrorHandlerService) { }
 
   ngOnInit(): void {
-    this.getCurrentProductId();
+    this.getUrlProductId();
     this.getProductDetails();
-    this.state.pageTitle += `: ${this.state.productId}`; // template literal
+    this.state.pageTitle += `: ${this.state.urlProductId}`; // template literal
   }
 
   ngOnDestroy(): void {
@@ -40,14 +40,21 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   }
 
   getProductDetails() {
-      this.state.sub = this._productService.getProductDetails(this.state.productId).subscribe({
+      this.state.sub = this._productService.getProductDetails(this.state.urlProductId).subscribe({
         next: (product?) => this.state.product = product,
         complete: () => this.errorHandler.displaySuccess('Product details fetched successfully!')
       });
   }
   
-  getCurrentProductId() {
-    this.state.productId = String(this.route.snapshot.paramMap.get('id'));
+  getUrlProductId() {
+    const id = this.route.snapshot.paramMap.get('id');
+    if (this.isParamIdValid(id)) {
+      this.state.urlProductId = String(id);
+    }
+  }
+
+  isParamIdValid(id: string | null) {
+    return id && !isNaN(Number(id)) && Number(id) > 0;
   }
 
   navigateBack(): void {
