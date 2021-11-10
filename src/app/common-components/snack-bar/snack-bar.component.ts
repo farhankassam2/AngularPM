@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { MDCSnackbar } from '@material/snackbar';
+import { Component, Inject, OnInit } from '@angular/core';
+import {MatSnackBar, MatSnackBarConfig, MAT_SNACK_BAR_DATA} from '@angular/material/snack-bar';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'pm-snack-bar',
@@ -7,28 +8,21 @@ import { MDCSnackbar } from '@material/snackbar';
   styleUrls: ['./snack-bar.component.scss']
 })
 export class SnackBarComponent implements OnInit {
+  private readonly CONFIGS: MatSnackBarConfig = {
+    politeness: 'polite',
+    horizontalPosition: 'right',
+    verticalPosition: 'bottom',
+  }
 
-   shouldDisplay: boolean = false;
-   displayMessage: string = '';
-
-  constructor() { }
+  constructor(private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
   }
 
   setDisplayMessage(message: string) {
     if (message) {
-      this.displayMessage = message;
-      this.shouldDisplay = true;
-      const snackbar = new MDCSnackbar(document.querySelector('.mdc-snackbar') as Element);
-      snackbar.labelText = message;
-      snackbar.open();
+       let localSnackBar = this._snackBar.open(message, 'dismiss', this.CONFIGS);
     }
-  }
-
- reset() {
-    this.displayMessage = '';
-    this.shouldDisplay = false;
   }
 
 }

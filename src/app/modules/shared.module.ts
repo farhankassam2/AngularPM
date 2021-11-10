@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { StarComponent } from '../common-components/star/star.component';
 import { FormsModule } from '@angular/forms';
 import { SnackBarComponent } from '../common-components/snack-bar/snack-bar.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 // This module serves to create a list of components and modules that can be shared across multiple other modules, for ease of definition
@@ -11,20 +12,19 @@ import { SnackBarComponent } from '../common-components/snack-bar/snack-bar.comp
 @NgModule({
   declarations: [
     StarComponent,
-    SnackBarComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
+    MatSnackBarModule
   ],
   exports: [
     CommonModule,
     FormsModule,
     StarComponent,
-    SnackBarComponent
+    MatSnackBarModule
   ],
   providers: [
-    SnackBarComponent // creates single instance across all modules, so that when injected as a dependency anywhere, it refers to the same instance
   ]
 })
 export class SharedModule { }

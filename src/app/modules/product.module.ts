@@ -6,9 +6,10 @@ import { ConvertToSpacesPipe } from 'src/app/pipes/convert-to-spaces-pipe.pipe';
 import { ProductDetailGuard } from 'src/app/services/product-detail.guard';
 import { SharedModule } from './shared.module';
 
+// Every route inside of this module is a child route
 const routes: Routes = [
-  { path: 'products', component: ProductListComponent },
-  { path: 'products/:id', canActivate: [ProductDetailGuard], component: ProductDetailComponent },
+  { path: '', component: ProductListComponent }, // products path is defined as a lazy-loaded feature module in app.module.ts
+  { path: ':id', canActivate: [ProductDetailGuard], component: ProductDetailComponent },
 ]
 
 

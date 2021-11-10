@@ -1,8 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Injectable, OnChanges, NgZone } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
-import { MDCSnackbar } from '@material/snackbar';
 import { SnackBarComponent } from '../common-components/snack-bar/snack-bar.component';
 
 
@@ -42,7 +41,6 @@ export class ErrorHandlerService {
 
   displaySuccess(message: string): void {
     // this.toastr.success(message);
-    // const snackbar = new MDCSnackbar(document.querySelector('.mdc-snackbar') as Element);
     this.snackBarComponent.setDisplayMessage(message);
   }
 }
