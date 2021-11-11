@@ -23,6 +23,6 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     SharedModule,
   ],
-  exports: [ConvertToSpacesPipe]
+  exports: []
 })
 export class ProductModule { }

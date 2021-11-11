@@ -43,7 +43,7 @@ const routes: Routes = [
 
     BrowserAnimationsModule, // enables browser's animation system
     ToastrModule.forRoot(),
-    // ProductModule, // this does not get imported into this root module, because it is meant to be lazy-loaded
+    // ProductModule, // this does not get imported into this root module, because it is meant to be lazy-loaded. Putting it here loads it immediately.
     SharedModule,
   ],
   providers: [ProductService, SnackBarComponent, {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 3000}}], // need to provide SnackBarComponent globally here for it to be available as a singleton across the application
